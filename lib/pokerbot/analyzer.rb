@@ -8,11 +8,11 @@ class Pokerbot
     end
 
     def bet?
-      hand.hand > Hand::TwoPair
+      hand.type > Hand::TwoPair
     end
 
     def amount_to_bet
-      amount = tournament.minimum_bet * hand.hand.value
+      amount = tournament.minimum_bet * hand.type.value
       amount = tournament.maximum_bet if amount > tournament.maximum_bet
       amount
     end

@@ -42,7 +42,7 @@ class Pokerbot::Hand
 
     describe 'hand knows what it is and what cards it does not care about' do
       def hand(cards)
-        described_class.new(cards).hand
+        described_class.new(cards).type
       end
 
       def to_discard(cards)

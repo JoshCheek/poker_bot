@@ -22,7 +22,7 @@ class Pokerbot
       self.cards = cards.sort_by { |card| value_for card }
     end
 
-    def hand
+    def type
       return RoyalFlush    if consecutive_cards? && same_suit? && ace?(highest_card)
       return StraightFlush if consecutive_cards? && same_suit?
       return Quads         if quads.size == 1
@@ -36,7 +36,7 @@ class Pokerbot
     end
 
     def to_discard
-      case hand
+      case type
       when Quads
         kicker = (cards - quads.flatten).first
         ace?(kicker) ? [] : [kicker]
