@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path '../../lib', __FILE__
+require 'pokerbot'
+
+
+class Pokerbot
+  sandbox_config = {
+    betting_key:    'fc2455f8-1879-4ad4-8012-1f337c2869f2',
+    replace_key:    '728f53dd-a5dc-4582-8864-be37576b9592',
+    game_state_url: 'http://no-limit-code-em.com/sandbox/players/KEY',
+    action_url:     'http://no-limit-code-em.com/sandbox/players/KEY/action',
+  }
+
+  real_config = {
+    betting_key:    'edb6b7a3-6523-4fad-9ef3-d8176a083532',
+    replace_key:    'edb6b7a3-6523-4fad-9ef3-d8176a083532',
+    game_state_url: 'http://no-limit-code-em.com/api/players/KEY',
+    action_url:     'http://no-limit-code-em.com/api/players/KEY/action',
+  }
+
+  config = real_config
+  config = sandbox_config if ARGV.any? { |arg| arg.downcase == 'sandbox' }
+
+  loop do
+    tournament = Tournament.new config, RestClient
+    player     = Player.new tournament
+    player.take_turn if player.my_turn?
+    sleep 1
+  end
+end
