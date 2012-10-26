@@ -27,6 +27,19 @@ class Pokerbot::Hand
       end
     end
 
+    specify 'they know their name' do
+      RoyalFlush.name.should    == 'RoyalFlush'
+      StraightFlush.name.should == 'StraightFlush'
+      Quads.name.should         == 'Quads'
+      FullHouse.name.should     == 'FullHouse'
+      Flush.name.should         == 'Flush'
+      Straight.name.should      == 'Straight'
+      Trips.name.should         == 'Trips'
+      TwoPair.name.should       == 'TwoPair'
+      OnePair.name.should       == 'OnePair'
+      HighCard.name.should      == 'HighCard'
+    end
+
     describe 'hand knows what it is and what cards it does not care about' do
       def hand(cards)
         described_class.new(cards).hand
